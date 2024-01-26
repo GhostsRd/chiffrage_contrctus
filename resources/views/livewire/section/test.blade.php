@@ -1,123 +1,6 @@
 <div >
     <div>
-        {{-- <div class="container   ">
-            <h3  id="titre-prof">Chiffrage</h3>
-            <p id="text-prof">Page  / section </p>   
-        </div>   --}}
-      
-        {{-- <div class="container shadow-sm rounded-2 p-2">
-            <div id="form-module1 active"  method="POST">
-            
-                   
-                      
-                <div>
-                  <div class="col-12 offset-1">
-                        <h5 class="fw-bold mt-2 title-form" >Nouveau section Test</h5><br>
-        
-                            <ul id="top-tab-list" class="p-0 row list-inline">
-                                <li class="mb-2 col-lg-2 col-md-6 col-4 text-dark border border-dark fw-bold rounded-4 m-2 pt-4">
-                                    <a href="#comment" class="nav-link">
-                                        <div class="iq-icon me-3 text-center fw-bold">
-                                            <svg class="svg-icon icon-20 rounded-4    text-warning" xmlns="http://www.w3.org/2000/svg" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                            <span class="dark-wizard ">Projet</span>
-                                        </div>
-                                    </a>
-                            </li>
-                            <li id="personnel" class="active mb-2 col-lg-2 col-4 col-md-6 bg-dark shadow ">
-                                <a href="#nom"  class="nav-link">
-                                    <div class="iq-icon me-3  fw-bold text-warning">
-                                        <svg class="svg-icon icon-20 rounded-4 text-warning" xmlns="http://www.w3.org/2000/svg" width="30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                        </svg>
-                                        <span class="dark-wizard ">Section</span>
-                                        </div>
-                                </a>
-                            </li>
-                           
-                            
-                            <li  class="mb-2 col-lg-2 col-md-6 col-4 text-warning border border-dark fw-bold rounded-4 m-2 pt-4">
-                                <a href="#comment" class="nav-link">
-                                    <div class="iq-icon me-3 text-center fw-bold">
-                                        <svg class="svg-icon icon-20 rounded-4 text-dark" xmlns="http://www.w3.org/2000/svg" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span class="dark-wizard ">Panning</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mb-2 col-lg-2 col-md-6 col-4 text-dark border border-dark fw-bold rounded-4 m-2 pt-4">
-                                <a href="#comment" class="nav-link">
-                                    <div class="iq-icon me-3 text-center fw-bold">
-                                        <svg class="svg-icon icon-20 rounded-4    text-warning" xmlns="http://www.w3.org/2000/svg" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span class="dark-wizard ">Devis</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li  class="mb-2 col-lg-2 col-md-6 col-4 text-warning border border-dark fw-bold rounded-4 m-2 pt-4">
-                                <a href="#comment" class="nav-link">
-                                    <div class="iq-icon me-3 text-center fw-bold">
-                                        <svg class="svg-icon icon-20 rounded-4 text-dark" xmlns="http://www.w3.org/2000/svg" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        <span class="dark-wizard ">Factures</span>
-                                    </div>
-                                </a>
-                            </li>
-                            </ul>
-                 
-                <form wire:submit.prevent="create" >
-                    @csrf
-                    
-                    <div class="coloumn">
-                        <div class="col-lg-6 offset-2">
-                      
-                            <label for="nom" class="text-muted m-2">{{_('Titre du projet *')}}( <span class="text-danger"> obligatoire </span> )</label>
-                            <select name="" id="" class="m-2 form-control" wire:model="id_projet" >
-                              <option value="1">séléctionner le projet ici ...</option>
-                              @foreach ($projets as $projet)
-                                  <option value="{{$projet->id}}">{{$projet->titre}}</option>
-                              @endforeach
-                            </select>
-                            <label for="#tarif" class="text-muted m-2"  >{{_("Désignation de l'item *")}}( <span class="text-danger"> obligatoire </span> )</label>  
-                            <select name="" id="" class="m-2 form-control" wire:model="designation" required>
-                                <option value="1">séléctionner le projet ici ...</option>
-                                @foreach ($items as $item)
-                                    <option value="{{$item->designation}}">{{$item->designation}}</option>
-                                @endforeach
-                              </select>
-                            <label for="#tarif" class="text-muted m-2"  >{{_('Commentaire *')}}( <span class="text-danger">optionnel</span> )</label>              
-                              <input type="text" name="tarif" id="tarif" wire:model="commentaire"   class="card-title form-control m-2 col-4 col-lg-4" placeholder="Commmentaire" >                         
-                              
-                              <label for="#tarif" class="text-muted m-2" >{{_('Temps passé *')}}</label>              
-                              <input type="number" name="tarif" id="tarif" wire:model="temps_passe"   class="card-title form-control m-2 col-4 col-lg-4" placeholder="temps passé" required>                         
-                              
-                              <label for="contact" class="text-muted m-2">{{_('Date de création *')}}</label>
-                              <input type="date" name="contact" wire:model="date"  class="card-title form-control m-2 col-4 col-lg-4" placeholder="temps passé" required> 
-                       
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn  btn-primary btn-sm text-white border-0  fw-bold offset-8 mt-4 m rounded-5 shadow-sm" >
-                        <a href="{{url('/sectionDev')}}" class="nav-link">
-                            Précedent
-                        </a>
-                    </button>
-                   
-                    <button type="submit" class="btn btn-sm   btn-outline-light border-0 text-warning fw-bold mt-4 m rounded-5 shadow-sm me-4" wire:click="section">
-                        <a href="#" class="nav-link">   
-                            suivant
-                            <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                <path opacity="0.4" d="M7.916 22H16.084C19.623 22 22 19.724 22 16.335V7.665C22 4.276 19.623 2 16.084 2H7.916C4.378 2 2 4.277 2 7.666L2 16.335C2 19.724 4.378 22 7.916 22Z" fill="currentColor"></path>                                <path d="M12.8555 16.2792L16.6205 12.5312C16.9035 12.2492 16.9035 11.7502 16.6205 11.4672L12.8555 7.71918C12.5615 7.42718 12.0865 7.42818 11.7945 7.72218C11.5025 8.01618 11.5025 8.49018 11.7965 8.78318L14.2735 11.2502H7.91846C7.50346 11.2502 7.16846 11.5862 7.16846 12.0002C7.16846 12.4142 7.50346 12.7502 7.91846 12.7502H14.2735L11.7965 15.2162C11.6495 15.3632 11.5765 15.5552 11.5765 15.7482C11.5765 15.9392 11.6495 16.1312 11.7945 16.2772C12.0865 16.5702 12.5615 16.5712 12.8555 16.2792Z" fill="currentColor"></path>                                </svg>                            
-                        </a>
-                    </button>
-                    
-                </div>
-            </div>
-        </div>
-    </div> --}}
+
     <div class="container col-lg-12 p-2 rounded-3">
         <div class="col-lg-10 offset-lg-1     p-2">
             <ul id="top-tab-list" class="p-0 row list-inline">
@@ -179,54 +62,9 @@
         {{-- <hr class="col-lg-5 offset-3"> --}}
     <br>
 
-        {{-- <h5 class="fw-bold mt-2 title-form offset-lg-4" >  <span id="text-prof">Devis  / Projet  / </span> Séction <span id="text-prof">/ Planification / Facture</span>
-        </h5> 
-        <h5 id="titre-prof" class="fw-bold offset-lg-1">Détails des items</h5>
-        <hr class="col-5"> --}}
-
-            
-            {{-- <div class="col-lg-3 fw-bold offset-lg-2">Section</div> --}}
-            
-                 
 
                   <div class="row ">
-                    {{-- <div class="col-lg-1 text-center  p-2 rounded-3 offset-1  h-75   ">
-                        <button disabled="disabled" class="border rounded-5    btn btn-primary  " >
-                            <svg class="icon-20 text-white fw-bold" width="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23 7L6.44526 17.8042C5.85082 18.1921 5.0648 17.9848 4.72059 17.3493L1 10.4798" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                             </svg>    
-                        </button><br>
-                        <span class="text-success fw-bold" >. </span><br>
-                        <span class="text-success fw-bold" >. </span><br>
-                        <span class="text-success fw-bold" >. </span><br>
-                        
-                 
-                        <button disabled="disabled" class=" rounded-5 border btn btn-primary  ">
-                            <svg class="icon-20 text-white fw-bold" width="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23 7L6.44526 17.8042C5.85082 18.1921 5.0648 17.9848 4.72059 17.3493L1 10.4798" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
-                             </svg>      
-                        </button> <br>
-                        <span class="text-primary fw-bold " >. </span><br>
-                        <span class="text-primary fw-bold" >. </span><br>
-                        <span class="text-primary fw-bold" >. </span><br>
-                        
-                      
-                        <button disabled="disabled" class="rounded-5 border-0 shadow btn res active">3</button> <br>
-                        <span class="text-primary fw-bold " >. </span><br>
-                        <span class="text-primary fw-bold" >. </span><br>
-                        <span class="text-primary fw-bold" >. </span><br>
-                        
-              
-                        <button disabled="disabled" class=" rounded-5 border-0 shadow btn  res">4</button><br>
-                        <span class="text-primary fw-bold " >. </span><br>
-                        <span class="text-primary fw-bold" >. </span><br>
-                        <span class="text-primary fw-bold" >. </span><br>
-                        
                    
-                        <button disabled="disabled" class=" rounded-5 border-0 shadow btn  res">5</button><br>
-    
-    
-                    </div> --}}
                     <div class="col-lg-11 " data-aos="zoom-in-out" data-aos-delay="400">
                         <div class="col-2 col-lg-2 offset-lg-1 bg-white  shadow-sm  rounded-3">
                          
@@ -295,8 +133,7 @@
     
                                     @csrf
                                     <input type="hidden" name="id" value="{{$dev->id}}">
-                                <div class="row me-2 ms-2">
-                                    
+                                    <div class="row me-2 ms-2">                                    
                                         <div class="col-lg-5">
                                             <input  type="text"  name="designation" id="" class="form-control-plaintext  p-1 w-100  shadow-sm  rounded-3  text-muted mt-2"  placeholder="Designation de l'item" value="{{$dev->designation}}" required>
                                         </div>
@@ -324,17 +161,13 @@
                                                 Valider
 
                                             </button>
-                                        </div>
-                                        </form>
-                    
-                                    
-                    
+                                    </div>
+                                </form>
                                         <div class="col-lg-1 col-1 offset-4 offset-lg-0  text-center" ><a  href="{{url("/sectionTest",$dev->id)}}" class="nav-link  mt-2" >
                                                 <svg data-aos="fade-left" data-aos-delay="800"  class="icon-32  anim text-danger" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                <path opacity="0.4" d="M19.643 9.48851C19.643 9.5565 19.11 16.2973 18.8056 19.1342C18.615 20.8751 17.4927 21.9311 15.8092 21.9611C14.5157 21.9901 13.2494 22.0001 12.0036 22.0001C10.6809 22.0001 9.38741 21.9901 8.13185 21.9611C6.50477 21.9221 5.38147 20.8451 5.20057 19.1342C4.88741 16.2873 4.36418 9.5565 4.35445 9.48851C4.34473 9.28351 4.41086 9.08852 4.54507 8.93053C4.67734 8.78453 4.86796 8.69653 5.06831 8.69653H18.9388C19.1382 8.69653 19.3191 8.78453 19.4621 8.93053C19.5953 9.08852 19.6624 9.28351 19.643 9.48851Z" fill="currentColor"></path>                                <path d="M21 5.97686C21 5.56588 20.6761 5.24389 20.2871 5.24389H17.3714C16.7781 5.24389 16.2627 4.8219 16.1304 4.22692L15.967 3.49795C15.7385 2.61698 14.9498 2 14.0647 2H9.93624C9.0415 2 8.26054 2.61698 8.02323 3.54595L7.87054 4.22792C7.7373 4.8219 7.22185 5.24389 6.62957 5.24389H3.71385C3.32386 5.24389 3 5.56588 3 5.97686V6.35685C3 6.75783 3.32386 7.08982 3.71385 7.08982H20.2871C20.6761 7.08982 21 6.75783 21 6.35685V5.97686Z" fill="currentColor"></path>                                </svg>                            
                                                     
                                                     </a>
-                                        </div>
-    
+                                        </div>   
                                 </div>
                                 
                             
@@ -378,7 +211,7 @@
     </div>
 
     {{-- notifcation --}}
-    @if (session('notif'))
+  @if (session('notif'))
 
     <div id="notification" class="rounded-3 p-2 active shadow  ">
     
@@ -395,7 +228,7 @@
     </div>
   @endif
 
-  @if (session('info'))
+@if (session('info'))
 
   <div id="notification" class="rounded-3 p-2 active shadow  ">
   
@@ -412,5 +245,79 @@
   </div>
 @endif
 
+@if(session('projet'))
+  <div id="modal1" class="form shadow w-75 active" >
+  
+    <div class="col-lg-12">
+      <h5 class="fw-bold title-form text-center" >Sélectionner les items pour le projet</h5>
+
+       <hr>
+    <form wire:submit.prevent="EnvoyerItems">
+
     
+    @foreach($sections as $section)
+       
+       <div class="col-lg-4 col-7">
+        <h5 class="fw-bold    text-capitalize">
+            <svg class="icon-32 text-secondary " width="27" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                    <path d="M15.7161 16.2234H8.49609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M15.7161 12.0369H8.49609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M11.2521 7.86011H8.49707" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.909 2.74976C15.909 2.74976 8.23198 2.75376 8.21998 2.75376C5.45998 2.77076 3.75098 4.58676 3.75098 7.35676V16.5528C3.75098 19.3368 5.47298 21.1598 8.25698 21.1598C8.25698 21.1598 15.933 21.1568 15.946 21.1568C18.706 21.1398 20.416 19.3228 20.416 16.5528V7.35676C20.416 4.57276 18.693 2.74976 15.909 2.74976Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                </svg>                            
+            {{$section->designation}}</h5>
+    </div>
+         
+        <div id="{{$section->id}}"  class="col-lg-12  bg-white offset-lg-1  mt-2 bg-none  p-lg-2" >
+
+        
+                  
+                    <div class="coloumn">
+        
+                    
+            
+                @foreach ($suggestion as $dev )     
+                @if($dev->id_section == $section->id)
+                <div class="row me-2 ms-2">
+                    
+                        <div class="col-lg-6">
+                            <input  type="text" disabled name="designation" id="" class="form-control-plaintext  p-1 w-100  shadow-sm  rounded-3  text-muted mt-2"  placeholder="Designation de l'item"
+                             value="{{$dev->designation}}" required>
+                        </div>
+                        <div class="col-lg-3 "> 
+                            <input disabled  type="number" name="temps_passe" id=""
+                             class="shadow-sm  form-control-plaintext p-1   rounded-3  mt-2 text-muted " placeholder="duré en jours"
+                              value="{{$dev->temps_passe}}" required></div>
+                        
+                        <div class="col-lg-3">
+                            <input type="checkbox" wire:model="tableItem" value="{{$dev->id}}" class=" mt-3">
+                        </div>
+                           
+                </div>
+                @endif
+                @endforeach
+                        <br>
+                        <div class="row offset-lg-8">
+
+                            <div class="col-lg-2 ">
+                                <button class="btn btn-primary btn-sm rounded-3  border-0" wire:click.prevent="EnvoyerItems">Valider</button>
+                                
+                            </div>
+                            <div class="col-lg-2 ms-2">
+                                <button class="btn btn-outline-danger border border-danger btn-sm rounded-3 " >
+                                    <a href="" class="nav-link">Annuler</a>
+                                </button>
+                                
+                            </div>
+                        </div>
+                    
+            </div>
+        
+        </div>  
+
+  
+    
+      @endforeach
+    </form>    
+      </div>
+
+  
+  </div>
+
+@endif
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Section;
 
 use App\Http\Controllers\DeleteSelected;
+use App\Models\Avoirs;
 use App\Models\Devis;
 use App\Models\Items;
 use App\Models\Projets;
@@ -35,11 +36,13 @@ class Dev extends Component
      }
      public function deleteSelected(Items $items){
      
+
+         //    foreach($this->checkData as $data)
+         //  Avoirs::query()
+         //      ->where('id_items',$data)
+         //      ->delete();
+
         DeleteSelected::deleteSelected($items,"/items",$this->checkData);
-    //     foreach($this->checkData as $data)
-    //   Items::query()
-    //       ->where('id',$this->checkData)
-    //       ->delete();
 
     //   $this->checkData = [];
 

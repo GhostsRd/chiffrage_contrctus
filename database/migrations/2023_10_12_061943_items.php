@@ -17,6 +17,7 @@ class Items extends Migration
             $table->id()->autoIncrement();
             $table->integer('id_projet');
             $table->integer('id_section');
+            $table->integer('id_facture');
             $table->string('designation')->nullable();
             $table->string('commentaire')->nullable();
             $table->integer('temps_passe')->nullable();

@@ -13,6 +13,7 @@ use App\Models\projets;
 use App\Models\Realisers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 
@@ -28,7 +29,7 @@ class Test extends Component
   //   ites
   public $it;
   public $check;
-
+  public $id_facture;
   // creation items vide
   public $devis;
   public $tests;
@@ -44,6 +45,42 @@ class Test extends Component
   public $devs = [];
   //   pour la section test4
   public $secTests = [];
+  // tableu items pour le projet existant
+  public $tableItem = [];
+  public $suggestion;
+  public $data;
+
+
+  public function EnvoyerItems()
+  {
+
+    for ($i = 0; $i < count($this->tableItem); $i++) {
+      // }
+      //     foreach($this->tableItem as $val){
+      $vales = Items::query()->where('id', $this->tableItem[$i])->get();
+
+      // if ($i == 1) {
+
+      //   dd($vales);
+      // }
+      foreach ($vales as $val) {
+
+        // dd($vales);
+
+        Items::create([
+          'designation' => $val->designation,
+          'id_projet' => $val->id_projet,
+          'id_facture' => $val->id_facture,
+          'id_section' => $val->id_section,
+          'temps_passe' => $val->temps_passe,
+          'id_facture' => $this->id_facture,
+        ]);
+      }
+    }
+    Session::forget("projet");
+    return redirect("/chiffrage");
+  }
+
 
 
   public function section($value)
@@ -101,11 +138,11 @@ class Test extends Component
     ]);
     $id_items = Items::where('id_projet', $this->it)->get();
 
-    $id = null;
-    foreach ($id_items as $item) {
-      $id = $item->id;
-    }
-  
+    // $id = null;
+    // foreach ($id_items as $item) {
+    //   $id = $item->id;
+    // }
+
     return redirect("/chiffrage");
   }
 
@@ -132,7 +169,7 @@ class Test extends Component
       }
       // dd($id_fact);
       // fin facture
-      
+
       // tarif get
       $tarifs = Profils::where('id', $request->profile)->get();
       foreach ($tarifs as $tarif) {
@@ -141,7 +178,7 @@ class Test extends Component
 
       // calcule tari
       $prix_finale = $request->temps_passe * $prix;
-      
+
       // ajout realiser
 
       $res = Realisers::where("id_items", $request->id)->get();
@@ -153,9 +190,9 @@ class Test extends Component
       }
 
 
-      if ($variable != "" && $id_facture_exist == $id_fact ) {
+      if ($variable != "" && $id_facture_exist == $id_fact) {
 
-        
+
         Realisers::where("id_items", $request->id)->update([
           "id_profile" => $request->profile,
           "id_facture" => $id_fact,
@@ -179,30 +216,30 @@ class Test extends Component
       $id_devis = $test->id;
       $id_planning = $test->choix_planification;
     }
-    
-   $id_fin = intval($id_planning);
-    $items_data = Avoirs::where('id_items',$request->id)->get();
-      $id_av = "";
-      $id_plan = "";
-    foreach($items_data as $item){
-      $id_av =$item->id;
+
+    $id_fin = intval($id_planning);
+    $items_data = Avoirs::where('id_items', $request->id)->get();
+    $id_av = "";
+    $id_plan = "";
+    foreach ($items_data as $item) {
+      $id_av = $item->id;
       $id_plan = $item->id_planification;
     }
     // dd($id_plan);
 
 
-    if($id_av != "" && $id_plan == $id_fin ){
+    if ($id_av != "" && $id_plan == $id_fin) {
       // dd($id_pla);
-      Avoirs::where('id_items', $request->id)->where('id_planification',$id_fin)->update([
+      Avoirs::where('id_items', $request->id)->where('id_planification', $id_fin)->update([
         'id_planification' => $id_fin,
         "date_debut" => 0,
         'duree' => $request->temps_passe,
       ]);
-    }else{
+    } else {
       // $mydatas = Planifications::max("created_at");
       // $myids = Planifications::where("created_at",mydatas)->get();g
 
-    
+
       // foreach($myids as $myid){
       //   $resu = $myid->id;
       // }
@@ -217,7 +254,7 @@ class Test extends Component
         'duree' => $request->temps_passe,
       ]);
     }
-   
+
 
     return redirect('/chiffrage')->with("notif", "Item ajouté avec succés");
   }
@@ -228,17 +265,16 @@ class Test extends Component
     foreach ($vals as $val) {
       $id_pro  = $val->id_projet;
     }
-    $res = Devis::where('id_projet',$id_pro)->count('id');
+    $res = Devis::where('id_projet', $id_pro)->count('id');
     // dd($res);
 
-    if($res == 1){  
       Items::where('id', $id)->delete();
       Realisers::where('id_items', $id)->delete();
       return redirect('/chiffrage')->with("notif", "Supression avec succéss");
-    }else{
-      return redirect('/chiffrage')->with("info", "Vous ne pouvez pas faire une supression, l'item est associé à un autre devi");
-    }
-
+    // if ($res == 1) {
+    // } else {
+    //   return redirect('/chiffrage')->with("info", "Vous ne pouvez pas faire une supression, l'item est associé à un autre devi");
+    // }
   }
 
   public function verificationPlanning()
@@ -249,17 +285,17 @@ class Test extends Component
 
     foreach ($tests as $te) {
       $id_courant = $te->id;
-      $verify = $te->choix_planification ;
+      $verify = $te->choix_planification;
     }
-    $facts = Factures::where('id_devis',$id_courant)->get();
+    $facts = Factures::where('id_devis', $id_courant)->get();
 
-    foreach($facts as $fact){
+    foreach ($facts as $fact) {
       $re = $fact->id;
     }
-    $montant = Realisers::where('id_facture',$re)->sum("tarif");
+    $montant = Realisers::where('id_facture', $re)->sum("tarif");
     // dd($montant);
-    
-    Factures::where('id_devis',$id_courant)->update([
+
+    Factures::where('id_devis', $id_courant)->update([
       'montant' => $montant,
     ]);
 
@@ -268,14 +304,14 @@ class Test extends Component
     //     $somme = $fact->montant;
 
     //   }
-      
-      Devis::where("id",$id_courant)->update([
-        "etat_devis"=> "ok",
-         "montant_total"=> $montant,
-      ]);
+
+    Devis::where("id", $id_courant)->update([
+      "etat_devis" => "ok",
+      "montant_total" => $montant,
+    ]);
 
 
-  
+
     //   dd($te->choix_planification);
     if (is_null($verify)) {
       return redirect("/facture");
@@ -302,25 +338,41 @@ class Test extends Component
     $this->it;
     $this->check;
     $this->disabled;
+    $this->suggestion;
+    $this->data;
+
   }
 
 
-  public function render()
+  public function render(Request $request)
   {
     $this->devis = Devis::max('created_at');
     $this->tests = Devis::where('created_at', $this->devis)->get();
 
+
     foreach ($this->tests as $te) {
       $this->it = $te->id_projet;
+      $id_devis = $te->id;
     }
+
+    $factures  = Factures::where('id_devis', $id_devis)->get();
+
+    foreach ($factures as $fact) {
+      $this->id_facture = $fact->id;
+    }
+    $this->data = $request->session()->get('projet');
+    
+    
     return view('livewire..section.test', [
       $this->projets = Projets::all(),
       "profiles" => Profils::all(),
-     
-      $this->secTests = Items::where('id_projet', $this->it)->get(),
+
+      $this->secTests = Items::where('id_projet', $this->it)->where('id_facture', $this->id_facture)->get(),
+      $this->suggestion = Items::where('id_projet', $this->it)->get(),
+
 
       //  section visualisation
-    
+
       "sections" => Sections::where("id_projet", $this->it)->orderby("designation")->get(),
       "sectionalls" => Sections::orderby('id')->get(),
 

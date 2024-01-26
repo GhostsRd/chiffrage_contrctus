@@ -9,8 +9,10 @@ use App\Models\Factures;
 use App\Models\Items;
 use App\Models\Planifications;
 use App\Models\Projets;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Devis extends Component
@@ -142,6 +144,7 @@ class Devis extends Component
         // Items::where('id_projet',$this->num_projet)->delete();
         Planifications::create();
         
+        Session::put('projet',"projet des");
         // $this->id_devis = ModelsDevis::where('id_projet',$this->num_projet)->get('id');
         return redirect('/chiffrage ');
         

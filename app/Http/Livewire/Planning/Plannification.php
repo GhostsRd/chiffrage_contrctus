@@ -74,12 +74,12 @@ class Plannification extends Component
             Planifications::where("id",$pl)->update([
                 "choix_planning"=> 0,
             ]);
-            return redirect('/planification')->with('info',"Planning affiché par jour !");
+            return redirect('/planification')->with('info',"Le planning est affiché par jour !");
         }else{
             Planifications::where("id",$pl)->update([
                 "choix_planning"=>1,
             ]);
-            return redirect('/planification')->with('info',"Planning affiché par semaine !");
+            return redirect('/planification')->with('info',"Le planning est affiché par semaine !");
 
         }
     }
@@ -205,7 +205,7 @@ class Plannification extends Component
            
         }else{
             if($this->id_item == ""){
-                return redirect('/planification')->with('info',"sectionner d'abord l'item puis la date de debut !");
+                return redirect('/planification')->with('info',"Sélectionner d'abord l'item puis la date de debut !");
             }else{
                 $this->devis = Devis::max('created_at');
                 $this->tests = Devis::where('created_at', $this->devis)->get();

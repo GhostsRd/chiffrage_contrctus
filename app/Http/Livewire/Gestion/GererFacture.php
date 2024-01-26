@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Gestion;
 
 use App\Http\Controllers\DeleteSelected;
 use App\Models\Factures;
+use App\Models\Realisers;
 use Livewire\Component;
 
 class GererFacture extends Component
@@ -29,6 +30,11 @@ class GererFacture extends Component
    public $recherche;
 
    public function deleteSelected(Factures $facture){
+
+        foreach($this->checkData as $data)
+          Realisers::query()
+              ->where('id_facture',$data)
+              ->delete();
 
     DeleteSelected::deleteSelected($facture,"/gestion/facture",$this->checkData);
  

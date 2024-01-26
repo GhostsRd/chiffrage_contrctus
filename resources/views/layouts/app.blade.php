@@ -247,7 +247,7 @@
     <script>
         AOS.init({
             disableMutationObserver: true,
-           
+            once: true,
             easing: 'ease',
             startEvent: 'DOMContentLoaded',
         });

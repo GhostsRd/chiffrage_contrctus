@@ -449,6 +449,26 @@ tbody{
   overflow: hidden;
   transition: 0.4s;
 }
+#modal1{
+  /* text-align: center; */
+  background: white;
+ 
+  position: fixed;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -300%;
+  /* top: 50% !important;
+  left: 35%;
+  transform: translateY(-50%) !important; */
+  padding: 10px;
+  z-index: 12;
+  border-radius: 10px;
+  /* border-top-style:outset ; */
+  overflow: hidden;
+  transition: 0.4s;
+}
 #notification {
   /* text-align: center;  */
   background: rgb(218, 231, 223);
@@ -502,6 +522,26 @@ tbody{
   top: 50% !important;
   left: 35%;
   transform: translateY(-50%) !important;
+  /* top: 50% !important;
+  transform: translateY(-50%) !important; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  
+  /* box-shadow: 0px 0px 0px 1000px rgba(85, 85, 85, 0.652); */
+ 
+  zoom: 0%;
+  transition: 0.3s;
+  opacity: 1;
+}
+#modal1.active{
+  /* position: sticky; */
+
+  display: flex;
+  position: fixed;
+  top: 50% !important;
+  left: 10%;
+  transform: translateY(-50%) !important;
+  overflow-y: scroll;
   /* top: 50% !important;
   transform: translateY(-50%) !important; */
   /* align-items: center; */

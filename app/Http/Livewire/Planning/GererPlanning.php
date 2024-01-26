@@ -16,10 +16,9 @@ class GererPlanning extends Component
 
     public function deleteSelected(Planifications $planification){
      
-       foreach($this->checkData as $data){
-
-           Avoirs::query()
-           ->where('id_planification',$data)
+        // vider la table avoir
+       foreach($this->checkData as $data){     
+           Avoirs::where('id_planification',$data)
            ->delete();
        }
 
