@@ -137,14 +137,30 @@
                                         <div class="col-lg-5">
                                             <input  type="text"  name="designation" id="" class="form-control-plaintext  p-1 w-100  shadow-sm  rounded-3  text-muted mt-2"  placeholder="Designation de l'item" value="{{$dev->designation}}" required>
                                         </div>
-                                        <div class="col-lg-2 "> <input   type="number" name="temps_passe" id="" class="shadow-sm  form-control-plaintext p-1   rounded-3  mt-2 text-muted " placeholder="duré en jours" value="{{$dev->temps_passe}}" required></div>
+                                        <div class="col-lg-2 "> <input   type="number" name="temps_passe" id="" 
+                                            class="shadow-sm  form-control-plaintext p-1   rounded-3  mt-2 text-muted " placeholder="duré en jours" 
+                                            value="{{$dev->temps_passe}}" required></div>
                                         <div class="col-lg-3  ">
                                             <select type="submit" name="profile" id="" class="form-control-plaintext p-1 rounded-3 shadow-sm text-capitalize      text-muted mt-2 " required>
-                                                <option value="">select profile</option>
+                                                <option value="">Sélectionner un profile </option>
                                                 @foreach ($profiles as $profile )
-                                            
-                                                <option value="{{$profile->id}}">{{$profile->profile}}</option>
-                                            @endforeach
+                                                {{-- @if($dev->) --}}
+                                            {{-- @foreach ($profiles as $re) --}}
+                                                {{-- @if($realisoptioner->id_items == $dev->id )
+                                                {{dump($realiser)}}
+                                                @if ($realiser->id_profile == $profile->id) --}}
+                                                 <option value="{{$profile->id}}">{{$profile->profile}}</option> --}}
+{{--                                                 
+                                                @endif
+                                                @endforeach
+                                                @else
+                                                @foreach ($profiles as $profile )
+                                                <option value="">select profile</option>
+                                                @endif
+                                                --}}
+                                                @endforeach
+                                                
+                                           
                                             </select>
                                         </div>
                                         <div class="col-lg-1 offset-lg-0 offset-4">
@@ -219,7 +235,7 @@
           <svg class="icon-32 text-success" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.67 2H16.34C19.73 2 22 4.38 22 7.92V16.091C22 19.62 19.73 22 16.34 22H7.67C4.28 22 2 19.62 2 16.091V7.92C2 4.38 4.28 2 7.67 2ZM11.43 14.99L16.18 10.24C16.52 9.9 16.52 9.35 16.18 9C15.84 8.66 15.28 8.66 14.94 9L10.81 13.13L9.06 11.38C8.72 11.04 8.16 11.04 7.82 11.38C7.48 11.72 7.48 12.27 7.82 12.62L10.2 14.99C10.37 15.16 10.59 15.24 10.81 15.24C11.04 15.24 11.26 15.16 11.43 14.99Z" fill="currentColor"></path>                            </svg>                        
           <a href="" class="nav-link ms-1">
               <span class="fw-bold">Success</span><br>
-             {{-- RAKTOnirina rado leonce RAKTOnirina LEONCERARAKOROIN --}}
+            
               {{session('notif')}} <span class="text-danger fw-bold">:) </span>
              
              </a>
@@ -292,19 +308,7 @@
                 @endif
                 @endforeach
                         <br>
-                        <div class="row offset-lg-8">
-
-                            <div class="col-lg-2 ">
-                                <button class="btn btn-primary btn-sm rounded-3  border-0" wire:click.prevent="EnvoyerItems">Valider</button>
-                                
-                            </div>
-                            <div class="col-lg-2 ms-2">
-                                <button class="btn btn-outline-danger border border-danger btn-sm rounded-3 " >
-                                    <a href="" class="nav-link">Annuler</a>
-                                </button>
-                                
-                            </div>
-                        </div>
+                        
                     
             </div>
         
@@ -313,6 +317,19 @@
   
     
       @endforeach
+      <div class="row offset-lg-8">
+
+        <div class="col-lg-2 ">
+            <button class="btn btn-primary btn-sm rounded-3  border-0" wire:click.prevent="EnvoyerItems">Valider</button>
+            
+        </div>
+        <div class="col-lg-2 ms-2">
+            <button class="btn btn-outline-danger border border-danger btn-sm rounded-3 " wire:click="exitSession" >
+                Annuler
+            </button>
+            
+        </div>
+    </div>
     </form>    
       </div>
 

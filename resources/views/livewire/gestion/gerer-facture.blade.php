@@ -100,7 +100,7 @@
             </form>
             
         </div>
-        {{-- {{$projets->links()}} --}}
+        {{$factures->links()}}
       
         {{-- form ajouter projet --}}
         <div id="modal" class="form shadow w-25  " method="POST">

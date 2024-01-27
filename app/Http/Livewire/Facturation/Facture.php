@@ -51,10 +51,6 @@ class Facture extends Component
         Factures::where('id_devis',$id_devis)->update([
             "date_envoi"=>new DateTime('now'),
         ]);
-        //   foreach($factures as $fact){
-        //       $id_fact = $fact->id;
-           
-        //     }
   
     }
 

@@ -71,9 +71,16 @@
                 
             <b>Delai de mise en Oeuvre :</b> {{ $max->delai}} jours
             <br>
-            <b>Date Début : {{$max->date_debut}}</b> <br>
+            <b>Date Début : {{
+            $rr = date(" d M Y ",strtotime( $max->date_debut));
+           }}
+            
+            </b> <br>
             {{-- calcul {{   date("Y-m-d", strtotime($date) + (5 * 24*60*60)  ) }} --}}
-           <b> Date Fin : {{$max->date_fin}}</b>
+           <b> Date Fin :{{
+            $rr = date(" d M Y ",strtotime( $max->date_fin));
+            
+            }}</b>
            @endforeach
         </div>
         

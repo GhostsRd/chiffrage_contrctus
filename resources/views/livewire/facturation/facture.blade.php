@@ -306,14 +306,28 @@
               </div>
                <div class="offset-lg-1 offset-0 col-12 col-lg-11" style="font-size:0.7rem">
                   <div class="col-lg-4 offset-1 offset-lg-0 col-4 p-2 me-2 border rounded-3 mb-2">
-                     @foreach ($planns as $plan)
-                     <b>Déscription</b> {{$plan->description}} <br>
-                     <b>Date debut : </b>{{ $plan->date_debut}} <br>
-                         
-                     <b>Delai de mise en Oeuvre :</b> {{ $plan->delai}} jours
+                     @foreach ($planns as $max)
+                     <b>Déscription:</b>
+                     @if ($max->description == "")
+                         - - -
+                     @else
+                     {{ $max->description}}
+                     @endif
                      <br>
-                     <b> Date Fin : </b> {{ $plan->date_fin}}
-                     @endforeach
+                         
+                     <b>Delai de mise en Oeuvre :</b> {{ $max->delai}} jours
+                     <br>
+                     <b>Date Début : {{
+                     $rr = date(" d M Y ",strtotime( $max->date_debut));
+                    }}
+                     
+                     </b> <br>
+                 
+                    <b> Date Fin :{{
+                     $rr = date(" d M Y ",strtotime( $max->date_fin));
+                     
+                     }}</b>
+                    @endforeach
                  </div>
                  <br>   
                  <h5 class="offset-lg-0 offset-1 fw-bold text-lg text-secondary ">Tableau de planning</h5>

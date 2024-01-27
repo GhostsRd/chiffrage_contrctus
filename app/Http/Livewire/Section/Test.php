@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Section;
 
+use App\Http\Livewire\Facturation\Facture;
 use App\Models\Avoirs;
 use App\Models\Devis;
 use App\Models\Factures;
@@ -49,6 +50,7 @@ class Test extends Component
   public $tableItem = [];
   public $suggestion;
   public $data;
+  public $realisers;
 
 
   public function EnvoyerItems()
@@ -80,7 +82,10 @@ class Test extends Component
     Session::forget("projet");
     return redirect("/chiffrage");
   }
-
+  public function exitSession(){
+    Session::forget("projet");
+    return redirect("/chiffrage");
+  }
 
 
   public function section($value)
@@ -310,7 +315,7 @@ class Test extends Component
       "montant_total" => $montant,
     ]);
 
-
+   Facture::updateFacture();
 
     //   dd($te->choix_planification);
     if (is_null($verify)) {
@@ -340,7 +345,10 @@ class Test extends Component
     $this->disabled;
     $this->suggestion;
     $this->data;
-
+    $this->realisers;
+     
+    // dd($this->id_facture);
+    
   }
 
 
@@ -362,13 +370,15 @@ class Test extends Component
     }
     $this->data = $request->session()->get('projet');
     
-    
+   
     return view('livewire..section.test', [
       $this->projets = Projets::all(),
       "profiles" => Profils::all(),
 
       $this->secTests = Items::where('id_projet', $this->it)->where('id_facture', $this->id_facture)->get(),
       $this->suggestion = Items::where('id_projet', $this->it)->get(),
+      
+      $this->realisers = Realisers::where('id_facture', $this->id_facture)->get(),
 
 
       //  section visualisation
